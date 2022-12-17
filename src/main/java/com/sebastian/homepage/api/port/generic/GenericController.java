@@ -1,6 +1,10 @@
-package com.sebastian.homepage.api.domain.core.generic;
+package com.sebastian.homepage.api.port.generic;
 
 import com.sebastian.homepage.api.domain.core.exception.NotFoundException;
+import com.sebastian.homepage.api.domain.core.generic.GenericEntity;
+import com.sebastian.homepage.api.domain.core.generic.GenericPutBody;
+import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
+import com.sebastian.homepage.api.domain.core.generic.GenericService;
 import jakarta.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;

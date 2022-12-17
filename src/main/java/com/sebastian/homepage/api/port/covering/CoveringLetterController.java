@@ -2,8 +2,8 @@ package com.sebastian.homepage.api.port.covering;
 
 import com.sebastian.homepage.api.domain.core.covering.CoveringLetter;
 import com.sebastian.homepage.api.domain.core.covering.PutBodyCoveringLetter;
-import com.sebastian.homepage.api.domain.core.generic.GenericController;
 import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
+import com.sebastian.homepage.api.port.generic.GenericController;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
