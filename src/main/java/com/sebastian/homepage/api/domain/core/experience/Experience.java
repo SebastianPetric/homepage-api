@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "experiences")
-public class Experience implements Serializable, GenericEntity<Experience> {
+public class Experience implements Serializable, GenericEntity<Experience, PutBodyExperience> {
 
     @Id
     private String id;
@@ -30,11 +30,26 @@ public class Experience implements Serializable, GenericEntity<Experience> {
         this.experiencePoints = experiencePoints;
     }
 
+
     @Override
-    public void update(Experience source) {
+    public void init(Experience source) {
         this.id = source.id;
         this.title = source.title;
         this.experiencePoints = source.experiencePoints;
+    }
+
+    @Override
+    public Experience editOriginal(PutBodyExperience source) {
+        if (source.getTitle() != null)
+            setTitle(source.getTitle());
+        if (source.getExperiencePoints() != null)
+            setExperiencePoints(source.getExperiencePoints());
+        if (source.getExperience() != null) {
+            List<String> tmp = getExperiencePoints();
+            tmp.add(source.getExperience());
+            setExperiencePoints(tmp);
+        }
+        return this;
     }
 
     public String getId() {
@@ -48,7 +63,7 @@ public class Experience implements Serializable, GenericEntity<Experience> {
     @Override
     public Experience createNewInstance() {
         Experience experience = new Experience();
-        experience.update(this);
+        experience.init(this);
         return experience;
     }
 

@@ -1,41 +1,19 @@
 package com.sebastian.homepage.api.port.experience;
 
-import com.sebastian.homepage.api.domain.core.exception.NotFoundException;
 import com.sebastian.homepage.api.domain.core.experience.Experience;
-import com.sebastian.homepage.api.domain.core.experience.ExperienceServiceImpl;
 import com.sebastian.homepage.api.domain.core.experience.PutBodyExperience;
 import com.sebastian.homepage.api.domain.core.generic.GenericController;
 import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
-import jakarta.validation.Valid;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/experiences", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ExperienceController extends GenericController<Experience> {
+public class ExperienceController extends GenericController<Experience, PutBodyExperience> {
 
-    @Autowired
-    ExperienceServiceImpl experienceServiceImpl;
-
-    protected ExperienceController(GenericRepository<Experience> repository) {
+    protected ExperienceController(GenericRepository<Experience, PutBodyExperience> repository) {
         super(repository);
     }
 
-    @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('admin:admin')")
-    public ResponseEntity<Experience> editById(@PathVariable ObjectId id, @RequestBody @Valid PutBodyExperience toModify) {
-
-        Optional<Experience> experience = experienceServiceImpl.findById(id);
-
-        if (experience.isEmpty())
-            throw new NotFoundException(id);
-
-        return ResponseEntity.ok(experienceServiceImpl.editById(experience.get(), toModify));
-    }
 }

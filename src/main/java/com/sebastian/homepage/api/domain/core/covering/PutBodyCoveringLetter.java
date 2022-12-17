@@ -1,6 +1,8 @@
 package com.sebastian.homepage.api.domain.core.covering;
 
-public class PutBodyCoveringLetter {
+import com.sebastian.homepage.api.domain.core.generic.GenericPutBody;
+
+public class PutBodyCoveringLetter implements GenericPutBody<PutBodyCoveringLetter> {
 
     private String text;
 

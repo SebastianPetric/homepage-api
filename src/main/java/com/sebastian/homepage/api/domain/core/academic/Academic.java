@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "academic")
-public class Academic implements Serializable, GenericEntity<Academic> {
+public class Academic implements Serializable, GenericEntity<Academic, PutBodyAcademic> {
 
     @Id
     private String id;
@@ -42,14 +42,34 @@ public class Academic implements Serializable, GenericEntity<Academic> {
         this.focusList = focusList;
     }
 
+
     @Override
-    public void update(Academic source) {
-        this.id = source.id;
-        this.title = source.title;
-        this.school = source.school;
-        this.from_date = source.from_date;
-        this.to_date = source.to_date;
-        this.focusList = source.focusList;
+    public Academic editOriginal(PutBodyAcademic source) {
+        if (source.getTitle() != null)
+            setTitle(source.getTitle());
+        if (source.getSchool() != null)
+            setSchool(source.getSchool());
+        if (source.getFrom_date() != null)
+            setFrom_date(source.getFrom_date());
+        if (source.getTo_date() != null)
+            setTo_date(source.getTo_date());
+        if (source.getFocusList() != null)
+            setFocusList(source.getFocusList());
+        if (source.getFocusPoint() != null) {
+            List<String> tmp = getFocusList();
+            tmp.add(source.getFocusPoint());
+            setFocusList(tmp);
+        }
+        return this;
+    }
+
+    @Override
+    public void init(Academic source) {
+        this.title = source.getTitle();
+        this.school = source.getSchool();
+        this.from_date = source.getFrom_date();
+        this.to_date = source.getTo_date();
+        this.focusList = source.getFocusList();
     }
 
     public String getId() {
@@ -63,7 +83,7 @@ public class Academic implements Serializable, GenericEntity<Academic> {
     @Override
     public Academic createNewInstance() {
         Academic academic = new Academic();
-        academic.update(this);
+        academic.init(this);
         return academic;
     }
 

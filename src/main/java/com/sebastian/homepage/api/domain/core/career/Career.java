@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "career")
-public class Career implements Serializable, GenericEntity<Career> {
+public class Career implements Serializable, GenericEntity<Career, PutBodyCareer> {
 
     @Id
     private String id;
@@ -44,13 +44,31 @@ public class Career implements Serializable, GenericEntity<Career> {
     }
 
     @Override
-    public void update(Career source) {
+    public void init(Career source) {
         this.id = source.id;
         this.title = source.title;
         this.company = source.company;
         this.from_date = source.from_date;
         this.to_date = source.to_date;
         this.toDos = source.toDos;
+    }
+
+    @Override
+    public Career editOriginal(PutBodyCareer source) {
+        if (source.getTitle() != null)
+            setTitle(source.getTitle());
+        if (source.getCompany() != null)
+            setCompany(source.getCompany());
+        if (source.getFrom_date() != null)
+            setFrom_date(source.getFrom_date());
+        if (source.getTo_date() != null)
+            setTo_date(source.getTo_date());
+        if (source.getToDos() != null) {
+            List<String> tmp = getToDos();
+            tmp.add(source.getToDo());
+            setToDos(tmp);
+        }
+        return this;
     }
 
     public String getId() {
@@ -64,7 +82,7 @@ public class Career implements Serializable, GenericEntity<Career> {
     @Override
     public Career createNewInstance() {
         Career career = new Career();
-        career.update(this);
+        career.init(this);
         return career;
     }
 

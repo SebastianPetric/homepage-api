@@ -1,9 +1,11 @@
 package com.sebastian.homepage.api.domain.core.career;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericPutBody;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public class PutBodyCareer {
+public class PutBodyCareer implements GenericPutBody<PutBodyCareer> {
 
 
     private String title;

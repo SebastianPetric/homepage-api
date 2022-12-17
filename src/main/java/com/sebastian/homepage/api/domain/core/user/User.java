@@ -8,9 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Document(collection = "users")
-public class User implements Serializable, GenericEntity<User> {
+public class User implements Serializable, GenericEntity<User, PutBodyUser> {
     @Id
     private String id;
 
@@ -82,7 +83,7 @@ public class User implements Serializable, GenericEntity<User> {
     }
 
     @Override
-    public void update(User source) {
+    public void init(User source) {
         this.id = source.id;
         this.first_name = source.first_name;
         this.last_name = source.last_name;
@@ -104,6 +105,47 @@ public class User implements Serializable, GenericEntity<User> {
         this.birth_city = source.birth_city;
     }
 
+    @Override
+    public User editOriginal(PutBodyUser source) {
+        if (source.getFirst_name() != null)
+            setFirst_name(source.getFirst_name());
+        if (source.getLast_name() != null)
+            setLast_name(source.getLast_name());
+        if (source.getPhone() != null)
+            setPhone(source.getPhone());
+        if (source.getTitle() != null)
+            setTitle(source.getTitle());
+        if (source.getDescription() != null)
+            setDescription(source.getDescription());
+        if (source.getFamilyState() != null)
+            setFamilyState(source.getFamilyState());
+        if (source.getBirthday() != null)
+            setBirthday(source.getBirthday());
+        if (source.getNationality() != null)
+            setNationality(source.getNationality());
+        if (source.getGithub_link() != null)
+            setGithub_link(source.getGithub_link());
+        if (source.getXing_link() != null)
+            setXing_link(source.getXing_link());
+        if (source.getLinkedin_link() != null)
+            setLinkedin_link(source.getLinkedin_link());
+        if (source.getBirth_land() != null)
+            setBirth_land(source.getBirth_land());
+        if (source.getBirth_city() != null)
+            setBirth_city(source.getBirth_city());
+        if (source.getStreet_name() != null)
+            setStreet_name(source.getStreet_name());
+        if (source.getStreet_number() != null)
+            setStreet_number(source.getStreet_number());
+        if (source.getPostal_code() != null)
+            setPostal_code(source.getPostal_code());
+        if (source.getCity() != null)
+            setCity(source.getCity());
+        if (source.getState() != null)
+            setState(source.getState());
+        return this;
+    }
+
     public String getId() {
         return id;
     }
@@ -115,7 +157,7 @@ public class User implements Serializable, GenericEntity<User> {
     @Override
     public User createNewInstance() {
         User user = new User();
-        user.update(this);
+        user.init(this);
         return user;
     }
 
@@ -261,5 +303,18 @@ public class User implements Serializable, GenericEntity<User> {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(street_name, user.street_name) && Objects.equals(street_number, user.street_number) && Objects.equals(postal_code, user.postal_code) && Objects.equals(city, user.city) && Objects.equals(state, user.state) && Objects.equals(title, user.title) && Objects.equals(description, user.description) && Objects.equals(phone, user.phone) && familyState == user.familyState && Objects.equals(birthday, user.birthday) && nationality == user.nationality && Objects.equals(github_link, user.github_link) && Objects.equals(xing_link, user.xing_link) && Objects.equals(linkedin_link, user.linkedin_link) && Objects.equals(birth_land, user.birth_land) && Objects.equals(birth_city, user.birth_city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, first_name, last_name, street_name, street_number, postal_code, city, state, title, description, phone, familyState, birthday, nationality, github_link, xing_link, linkedin_link, birth_land, birth_city);
     }
 }

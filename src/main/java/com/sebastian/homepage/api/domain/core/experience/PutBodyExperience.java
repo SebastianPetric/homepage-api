@@ -1,8 +1,10 @@
 package com.sebastian.homepage.api.domain.core.experience;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericPutBody;
+
 import java.util.List;
 
-public class PutBodyExperience {
+public class PutBodyExperience implements GenericPutBody<PutBodyExperience> {
 
     private String title;
 

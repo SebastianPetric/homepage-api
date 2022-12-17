@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Document(collection = "covering_letter")
-public class CoveringLetter implements Serializable, GenericEntity<CoveringLetter> {
+public class CoveringLetter implements Serializable, GenericEntity<CoveringLetter, PutBodyCoveringLetter> {
 
     @Id
     private String id;
@@ -30,11 +30,21 @@ public class CoveringLetter implements Serializable, GenericEntity<CoveringLette
     }
 
     @Override
-    public void update(CoveringLetter source) {
+    public void init(CoveringLetter source) {
         this.id = source.id;
         this.text = source.text;
         this.title = source.title;
     }
+
+    @Override
+    public CoveringLetter editOriginal(PutBodyCoveringLetter source) {
+        if (source.getTitle() != null)
+            setTitle(source.getTitle());
+        if (source.getText() != null)
+            setText(source.getText());
+        return this;
+    }
+
 
     public String getId() {
         return id;
@@ -47,7 +57,7 @@ public class CoveringLetter implements Serializable, GenericEntity<CoveringLette
     @Override
     public CoveringLetter createNewInstance() {
         CoveringLetter coveringLetter = new CoveringLetter();
-        coveringLetter.update(this);
+        coveringLetter.init(this);
         return coveringLetter;
     }
 

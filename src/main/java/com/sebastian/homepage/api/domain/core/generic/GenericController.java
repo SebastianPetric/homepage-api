@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class GenericController<T extends GenericEntity<T>> {
+public abstract class GenericController<T extends GenericEntity<T, B>, B extends GenericPutBody<B>> {
 
-    private final GenericService<T> service;
+    private final GenericService<T, B> service;
 
-    protected GenericController(GenericRepository<T> repository) {
-        this.service = new GenericService<T>(repository) {
+    protected GenericController(GenericRepository<T, B> repository) {
+        this.service = new GenericService<>(repository) {
         };
     }
 
@@ -33,6 +33,19 @@ public abstract class GenericController<T extends GenericEntity<T>> {
 
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin:admin')")
+    public ResponseEntity<T> editById(@PathVariable ObjectId id, @RequestBody @Valid B toModify) {
+
+        Optional<T> entity = service.findById(id);
+
+        if (entity.isEmpty())
+            throw new NotFoundException(id);
+
+        return ResponseEntity.ok(service.editById(entity.get(), toModify));
     }
 
 

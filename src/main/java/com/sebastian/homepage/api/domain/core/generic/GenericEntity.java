@@ -1,11 +1,12 @@
 package com.sebastian.homepage.api.domain.core.generic;
 
-public interface GenericEntity<T> {
-    // update current instance with provided data
-    void update(T source);
+public interface GenericEntity<T, B> {
+
+    void init(T source);
+
+    T editOriginal(B source);
 
     String getId();
 
-    // based on current data create new instance with new id
     T createNewInstance();
 }

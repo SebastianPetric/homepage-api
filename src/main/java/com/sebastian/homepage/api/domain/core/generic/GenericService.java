@@ -5,11 +5,11 @@ import org.bson.types.ObjectId;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class GenericService<T extends GenericEntity<T>> {
+public abstract class GenericService<T extends GenericEntity<T, B>, B extends GenericPutBody<B>> {
 
-    private final GenericRepository<T> repository;
+    private final GenericRepository<T, B> repository;
 
-    protected GenericService(GenericRepository<T> repository) {
+    protected GenericService(GenericRepository<T, B> repository) {
         this.repository = repository;
     }
 
@@ -23,6 +23,10 @@ public abstract class GenericService<T extends GenericEntity<T>> {
         return repository.findAll();
     }
 
+    public T editById(T entity, B toModify) {
+        T updated = entity.editOriginal(toModify);
+        return repository.save(updated);
+    }
 
     public Optional<T> findById(ObjectId id) {
         return repository.findById(id);

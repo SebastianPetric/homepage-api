@@ -1,9 +1,11 @@
 package com.sebastian.homepage.api.domain.core.user;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericPutBody;
+
 import java.time.LocalDate;
 
 
-public class PutBodyUser {
+public class PutBodyUser implements GenericPutBody<PutBodyUser> {
 
 
     private String first_name;
