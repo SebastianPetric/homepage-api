@@ -1,7 +1,6 @@
 package com.sebastian.homepage.api.domain.core.covering;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
 
-public interface ICoveringLetterRepository extends MongoRepository<CoveringLetter, ObjectId> {
+public interface ICoveringLetterRepository extends GenericRepository<CoveringLetter> {
 }

@@ -1,16 +1,18 @@
 package com.sebastian.homepage.api.domain.core.career;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "career")
-public class Career {
+public class Career implements Serializable, GenericEntity<Career> {
 
     @Id
     private String id;
@@ -41,12 +43,29 @@ public class Career {
         this.toDos = toDos;
     }
 
+    @Override
+    public void update(Career source) {
+        this.id = source.id;
+        this.title = source.title;
+        this.company = source.company;
+        this.from_date = source.from_date;
+        this.to_date = source.to_date;
+        this.toDos = source.toDos;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public Career createNewInstance() {
+        Career career = new Career();
+        career.update(this);
+        return career;
     }
 
     public String getTitle() {

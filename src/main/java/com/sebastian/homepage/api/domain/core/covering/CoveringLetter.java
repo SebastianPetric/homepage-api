@@ -1,13 +1,15 @@
 package com.sebastian.homepage.api.domain.core.covering;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericEntity;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Document(collection = "covering_letter")
-public class CoveringLetter {
+public class CoveringLetter implements Serializable, GenericEntity<CoveringLetter> {
 
     @Id
     private String id;
@@ -27,12 +29,26 @@ public class CoveringLetter {
         this.title = title;
     }
 
+    @Override
+    public void update(CoveringLetter source) {
+        this.id = source.id;
+        this.text = source.text;
+        this.title = source.title;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public CoveringLetter createNewInstance() {
+        CoveringLetter coveringLetter = new CoveringLetter();
+        coveringLetter.update(this);
+        return coveringLetter;
     }
 
     public String getText() {

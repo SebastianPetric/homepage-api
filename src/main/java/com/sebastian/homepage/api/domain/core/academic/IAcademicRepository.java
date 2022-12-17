@@ -1,7 +1,6 @@
 package com.sebastian.homepage.api.domain.core.academic;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
 
-public interface IAcademicRepository extends MongoRepository<Academic, ObjectId> {
+public interface IAcademicRepository extends GenericRepository<Academic> {
 }

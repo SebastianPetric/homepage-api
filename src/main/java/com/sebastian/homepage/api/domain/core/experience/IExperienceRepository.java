@@ -1,7 +1,6 @@
 package com.sebastian.homepage.api.domain.core.experience;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
 
-public interface IExperienceRepository extends MongoRepository<Experience, ObjectId> {
+public interface IExperienceRepository extends GenericRepository<Experience> {
 }

@@ -1,14 +1,16 @@
 package com.sebastian.homepage.api.domain.core.user;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Document(collection = "users")
-public class User {
+public class User implements Serializable, GenericEntity<User> {
     @Id
     private String id;
 
@@ -79,12 +81,42 @@ public class User {
         this.birth_city = birth_city;
     }
 
+    @Override
+    public void update(User source) {
+        this.id = source.id;
+        this.first_name = source.first_name;
+        this.last_name = source.last_name;
+        this.street_name = source.street_name;
+        this.street_number = source.street_number;
+        this.postal_code = source.postal_code;
+        this.city = source.city;
+        this.state = source.state;
+        this.title = source.title;
+        this.description = source.description;
+        this.phone = source.phone;
+        this.familyState = source.familyState;
+        this.birthday = source.birthday;
+        this.nationality = source.nationality;
+        this.github_link = source.github_link;
+        this.xing_link = source.xing_link;
+        this.linkedin_link = source.linkedin_link;
+        this.birth_land = source.birth_land;
+        this.birth_city = source.birth_city;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public User createNewInstance() {
+        User user = new User();
+        user.update(this);
+        return user;
     }
 
     public String getFirst_name() {

@@ -1,14 +1,16 @@
 package com.sebastian.homepage.api.domain.core.experience;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericEntity;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "experiences")
-public class Experience {
+public class Experience implements Serializable, GenericEntity<Experience> {
 
     @Id
     private String id;
@@ -28,12 +30,26 @@ public class Experience {
         this.experiencePoints = experiencePoints;
     }
 
+    @Override
+    public void update(Experience source) {
+        this.id = source.id;
+        this.title = source.title;
+        this.experiencePoints = source.experiencePoints;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public Experience createNewInstance() {
+        Experience experience = new Experience();
+        experience.update(this);
+        return experience;
     }
 
     public String getTitle() {

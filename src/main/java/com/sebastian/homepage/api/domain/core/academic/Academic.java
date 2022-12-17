@@ -1,16 +1,18 @@
 package com.sebastian.homepage.api.domain.core.academic;
 
+import com.sebastian.homepage.api.domain.core.generic.GenericEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "academic")
-public class Academic {
+public class Academic implements Serializable, GenericEntity<Academic> {
 
     @Id
     private String id;
@@ -40,12 +42,29 @@ public class Academic {
         this.focusList = focusList;
     }
 
+    @Override
+    public void update(Academic source) {
+        this.id = source.id;
+        this.title = source.title;
+        this.school = source.school;
+        this.from_date = source.from_date;
+        this.to_date = source.to_date;
+        this.focusList = source.focusList;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public Academic createNewInstance() {
+        Academic academic = new Academic();
+        academic.update(this);
+        return academic;
     }
 
     public String getTitle() {

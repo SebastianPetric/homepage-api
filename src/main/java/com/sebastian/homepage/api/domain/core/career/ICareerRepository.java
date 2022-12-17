@@ -1,7 +1,6 @@
 package com.sebastian.homepage.api.domain.core.career;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
 
-public interface ICareerRepository extends MongoRepository<Career, ObjectId> {
+public interface ICareerRepository extends GenericRepository<Career> {
 }

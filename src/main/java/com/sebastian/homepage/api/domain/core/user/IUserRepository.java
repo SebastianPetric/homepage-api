@@ -1,7 +1,6 @@
 package com.sebastian.homepage.api.domain.core.user;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.sebastian.homepage.api.domain.core.generic.GenericRepository;
 
-public interface IUserRepository extends MongoRepository<User, ObjectId> {
+public interface IUserRepository extends GenericRepository<User> {
 }
