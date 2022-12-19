@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homepage-api
+  labels:
+    app: homepage-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homepage-api
+  template:
+    metadata:
+      labels:
+        app: homepage-api
+    spec:
+      containers:
+        - name: homepage-api
+          image: sebastianpet90/homepage-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: configuration
+              mountPath: /app/config
+      volumes:
+        - name: configuration
+          secret:
+            secretName: homepage-api-secret

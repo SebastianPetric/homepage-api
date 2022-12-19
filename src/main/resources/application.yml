@@ -1,0 +1,17 @@
+auth0:
+  audience: homepage-sebastian-api
+  domain: domain
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      username: admin
+      password: password
+      database: homepage
+      port: 27017
+      host: 123.0.0.1
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://${auth0.domain}/

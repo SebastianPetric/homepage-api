@@ -1,0 +1,17 @@
+auth0:
+  audience: #audience
+  domain: #domain
+spring:
+  data:
+    mongodb:
+      authentication-database: #admin
+      username: #admin
+      password: #password
+      database: #homepage
+      port: #port
+      host: #ip
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: #issuer

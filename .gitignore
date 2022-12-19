@@ -17,6 +17,10 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
+###Secrets
+/Deployment/secret.yml
+/mongodb/mongodb-secrets.yaml
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
