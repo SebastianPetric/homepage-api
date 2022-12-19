@@ -12,11 +12,13 @@ public class PutBodyUser implements GenericPutBody<PutBodyUser> {
 
     private String last_name;
 
+    private String email;
+
     private String street_name;
 
     private Integer street_number;
 
-    private Long postal_code;
+    private Integer postal_code;
 
     private String city;
 
@@ -48,9 +50,9 @@ public class PutBodyUser implements GenericPutBody<PutBodyUser> {
 
     public PutBodyUser(String first_name,
                        String last_name,
-                       String street_name,
+                       String email, String street_name,
                        Integer street_number,
-                       Long postal_code,
+                       Integer postal_code,
                        String city, String state, String phone,
                        String title,
                        String description,
@@ -64,6 +66,7 @@ public class PutBodyUser implements GenericPutBody<PutBodyUser> {
                        String birth_city) {
         this.first_name = first_name;
         this.last_name = last_name;
+        this.email = email;
         this.street_name = street_name;
         this.street_number = street_number;
         this.postal_code = postal_code;
@@ -205,11 +208,11 @@ public class PutBodyUser implements GenericPutBody<PutBodyUser> {
         this.street_number = street_number;
     }
 
-    public Long getPostal_code() {
+    public Integer getPostal_code() {
         return postal_code;
     }
 
-    public void setPostal_code(Long postal_code) {
+    public void setPostal_code(Integer postal_code) {
         this.postal_code = postal_code;
     }
 
@@ -227,5 +230,13 @@ public class PutBodyUser implements GenericPutBody<PutBodyUser> {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
