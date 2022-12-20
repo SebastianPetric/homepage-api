@@ -12,6 +12,7 @@ pipeline {
 
     parameters {
         booleanParam(name: 'PUBLISH', defaultValue: false, description: 'If `true`, then it will push to Dockerhub.')
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'If `true`, then it will deploy to K8s.')
     }
 
     environment {
@@ -31,6 +32,12 @@ pipeline {
         }
 
         stage('Build image') {
+            when {
+                expression {
+                    return params.PUBLISH
+                }
+            }
+
             steps {
                 container('gradle') {
                     sh "sed -i 's/${version}/${newVersion}/' gradle.properties"
@@ -48,12 +55,39 @@ pipeline {
         }
 
         stage('Push image') {
+            when {
+                expression {
+                    return params.PUBLISH
+                }
+            }
+
             steps {
                 container("docker") {
                     script {
-                        docker.withRegistry('https://registry.hub.docker.com', 'sepe-dockerhub') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'jenkins-docker-access') {
                             app.push(newVersion)
                             app.push("latest")
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to K8s') {
+            when {
+                expression {
+                    return params.DEPLOY
+                }
+            }
+
+            steps {
+                script {
+                    sh "sed -i 's/homepage-api:latest/homepage-api:${newVersion}/' Deployment/deployment.yml"
+                }
+                container("kubectl") {
+                    withCredentials([string(credentialsId: 'jenkins-k8s-homepage-access', variable: 'token')]) {
+                        script {
+                            sh 'kubectl --token=${token} apply -f Deployment/deployment.yml'
                         }
                     }
                 }
