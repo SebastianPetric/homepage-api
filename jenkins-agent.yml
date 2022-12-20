@@ -1,22 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: jenkins-agent
   namespace: devops-tools
-  labels:
-    project: homepage-api
 spec:
   containers:
-    - name: jnlp
-      image: 'jenkins/inbound-agent:latest-jdk11'
-      args: [ '\$(JENKINS_SECRET)', '\$(JENKINS_NAME)' ]
-      resources:
-        requests:
-          memory: "384Mi"
-          cpu: "1"
-        limits:
-          memory: "768Mi"
-          cpu: "1"
     - name: gradle
       image: ibm-semeru-runtimes:open-18.0.2_9-jdk-focal
       command:
@@ -30,10 +17,11 @@ spec:
           memory: "1536Mi"
           cpu: "1"
     - name: docker
-      image: docker
+      image: docker:latest
       tty: true
       securityContext:
         privileged: true
+        runAsUser: 0
       resources:
         requests:
           memory: "256Mi"
@@ -42,9 +30,9 @@ spec:
           memory: "512Mi"
           cpu: "200m"
       volumeMounts:
-        - name: configuration
-          mountPath: /root/.docker
+        - name: dockersock
+          mountPath: "/var/run/docker.sock"
   volumes:
-    - name: configuration
-      secret:
-        secretName: docker-reg-secret
+    - name: dockersock
+      hostPath:
+        path: /var/run/docker.sock
