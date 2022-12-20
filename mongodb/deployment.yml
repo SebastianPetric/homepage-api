@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongo
+  namespace: homepage
   labels:
     app: mongo
 spec:
