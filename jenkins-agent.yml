@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: jnlp
-      image: 'jenkins/inbound-agent:latest-jdk18'
+      image: 'jenkins/inbound-agent:latest-jdk11'
       args: [ '\$(JENKINS_SECRET)', '\$(JENKINS_NAME)' ]
       resources:
         requests:
@@ -44,18 +44,6 @@ spec:
       volumeMounts:
         - name: configuration
           mountPath: /root/.docker
-    - name: kubectl
-      image: inx.dockreg.net/tools/kubectl-inxdev:latest
-      tty: true
-      command:
-        - cat
-      resources:
-        requests:
-          memory: "256Mi"
-          cpu: "100m"
-        limits:
-          memory: "256Mi"
-          cpu: "200m"
   volumes:
     - name: configuration
       secret:
