@@ -5,7 +5,7 @@ def app
 pipeline {
     agent {
         kubernetes {
-            label "homepage-api"
+            label "homepage-api-tmp"
             yamlFile "jenkins-agent.yml"
         }
     }
