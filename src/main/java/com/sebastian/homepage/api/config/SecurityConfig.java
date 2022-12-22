@@ -60,7 +60,7 @@ public class SecurityConfig {
                 HttpMethod.DELETE.name(),
                 HttpMethod.PUT.name()
         ));
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173", "https://sebastian-petoecz.vercel.app"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration.applyPermitDefaultValues());
