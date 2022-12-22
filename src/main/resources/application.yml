@@ -1,11 +1,11 @@
 auth0:
-  audience: homepage-sebastian-api
-  domain: domain
+  audience: ${AUTH0_AUDIENCE}
+  domain: ${AUTH0_DOMAIN}
 spring:
   data:
     mongodb:
-      uri: uri
-      database: homepage
+      uri: ${DATABASE_URL}
+      database: ${DATABASE_NAME}
   security:
     oauth2:
       resourceserver:

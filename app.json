@@ -1,0 +1,8 @@
+{
+  "name": "homepage-api",
+  "buildpacks": [
+    {
+      "url": "heroku/gradle"
+    }
+  ]
+}
