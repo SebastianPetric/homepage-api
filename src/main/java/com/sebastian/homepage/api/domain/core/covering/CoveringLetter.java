@@ -2,6 +2,7 @@ package com.sebastian.homepage.api.domain.core.covering;
 
 import com.sebastian.homepage.api.domain.core.generic.GenericEntity;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,29 +18,29 @@ public class CoveringLetter implements Serializable, GenericEntity<CoveringLette
     @NotEmpty
     private String text;
 
-    @NotEmpty
-    private String title;
+    @NotNull
+    private TextType type;
 
     public CoveringLetter() {
     }
 
-    public CoveringLetter(String id, String text, String title) {
+    public CoveringLetter(String id, String text, TextType type) {
         this.id = id;
         this.text = text;
-        this.title = title;
+        this.type = type;
     }
 
     @Override
     public void init(CoveringLetter source) {
         this.id = source.id;
         this.text = source.text;
-        this.title = source.title;
+        this.type = source.type;
     }
 
     @Override
     public CoveringLetter editOriginal(PutBodyCoveringLetter source) {
-        if (source.getTitle() != null)
-            setTitle(source.getTitle());
+        if (source.getType() != null)
+            setType(source.getType());
         if (source.getText() != null)
             setText(source.getText());
         return this;
@@ -69,12 +70,12 @@ public class CoveringLetter implements Serializable, GenericEntity<CoveringLette
         this.text = text;
     }
 
-    public String getTitle() {
-        return title;
+    public TextType getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(TextType type) {
+        this.type = type;
     }
 
     @Override
@@ -82,11 +83,11 @@ public class CoveringLetter implements Serializable, GenericEntity<CoveringLette
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CoveringLetter that = (CoveringLetter) o;
-        return Objects.equals(id, that.id) && Objects.equals(text, that.text) && Objects.equals(title, that.title);
+        return Objects.equals(id, that.id) && Objects.equals(text, that.text) && type == that.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, text, title);
+        return Objects.hash(id, text, type);
     }
 }

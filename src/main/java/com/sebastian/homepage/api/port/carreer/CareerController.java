@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/career", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CareerController extends GenericController<Career, PutBodyCareer> {
+    
     protected CareerController(GenericRepository<Career, PutBodyCareer> repository) {
         super(repository);
     }

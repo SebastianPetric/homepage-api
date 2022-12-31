@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/academic", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AcademicController extends GenericController<Academic, PutBodyAcademic> {
-
-
+    
     protected AcademicController(GenericRepository<Academic, PutBodyAcademic> repository) {
         super(repository);
     }

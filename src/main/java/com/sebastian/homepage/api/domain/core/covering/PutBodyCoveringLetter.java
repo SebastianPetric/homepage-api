@@ -5,9 +5,8 @@ import com.sebastian.homepage.api.domain.core.generic.GenericPutBody;
 public class PutBodyCoveringLetter implements GenericPutBody<PutBodyCoveringLetter> {
 
     private String text;
-
-
-    private String title;
+    
+    private TextType type;
 
     public String getText() {
         return text;
@@ -17,11 +16,11 @@ public class PutBodyCoveringLetter implements GenericPutBody<PutBodyCoveringLett
         this.text = text;
     }
 
-    public String getTitle() {
-        return title;
+    public TextType getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(TextType type) {
+        this.type = type;
     }
 }
