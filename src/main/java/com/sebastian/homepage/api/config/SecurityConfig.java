@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/academic").permitAll()
                 .requestMatchers(HttpMethod.GET, "/career").permitAll()
                 .requestMatchers(HttpMethod.GET, "/experiences").permitAll()
-                .requestMatchers(HttpMethod.GET, "/covering-letter").permitAll()
+                .requestMatchers(HttpMethod.GET, "/covering-letter/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
