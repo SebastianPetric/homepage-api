@@ -1,5 +1,6 @@
 package com.sebastian.homepage.api.domain.core.exception;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,6 +19,16 @@ public class RestResponseEntityExceptionHandler {
         ErrorMessage message = new ErrorMessage(
                 new Date(),
                 exception.getMessage(),
+                request.getDescription(false));
+        return message;
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    protected ErrorMessage handleMethodArgumentNotValid(ConstraintViolationException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                new Date(),
+                ex.getMessage(),
                 request.getDescription(false));
         return message;
     }
