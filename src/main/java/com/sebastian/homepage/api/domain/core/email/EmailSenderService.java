@@ -14,11 +14,14 @@ public class EmailSenderService {
     @Value("${spring.mail.username}")
     private String from;
 
-    public void sendEmail(String toEmail) {
+    @Value("${email.to}")
+    private String to;
+
+    public void sendEmail(String RequesterEmail) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(from);
-        simpleMailMessage.setTo(toEmail);
-        simpleMailMessage.setText("Bitte Lebenslauf an: ".concat(toEmail).concat(" verschicken."));
+        simpleMailMessage.setTo(to);
+        simpleMailMessage.setText("Bitte Lebenslauf an: ".concat(RequesterEmail).concat(" verschicken."));
         simpleMailMessage.setSubject("Lebenslauf Anfrage");
 
         mailSender.send(simpleMailMessage);
