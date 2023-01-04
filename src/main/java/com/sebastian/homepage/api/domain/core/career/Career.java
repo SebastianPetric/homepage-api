@@ -63,11 +63,8 @@ public class Career implements Serializable, GenericEntity<Career, PutBodyCareer
             setFrom_date(source.getFrom_date());
         if (source.getTo_date() != null)
             setTo_date(source.getTo_date());
-        if (source.getToDos() != null) {
-            List<String> tmp = getToDos();
-            tmp.add(source.getToDo());
-            setToDos(tmp);
-        }
+        if (source.getToDos() != null)
+            setToDos(source.getToDos());
         return this;
     }
 

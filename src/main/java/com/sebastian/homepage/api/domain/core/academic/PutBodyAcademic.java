@@ -20,8 +20,6 @@ public class PutBodyAcademic implements GenericPutBody<PutBodyAcademic> {
 
     private List<String> focusList;
 
-    private String focusPoint;
-
     public String getTitle() {
         return title;
     }
@@ -60,13 +58,5 @@ public class PutBodyAcademic implements GenericPutBody<PutBodyAcademic> {
 
     public void setFocusList(List<String> focusList) {
         this.focusList = focusList;
-    }
-
-    public String getFocusPoint() {
-        return focusPoint;
-    }
-
-    public void setFocusPoint(String focusPoint) {
-        this.focusPoint = focusPoint;
     }
 }

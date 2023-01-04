@@ -20,8 +20,6 @@ public class PutBodyCareer implements GenericPutBody<PutBodyCareer> {
 
     private List<String> toDos;
 
-    private String toDo;
-
     public String getTitle() {
         return title;
     }
@@ -60,13 +58,5 @@ public class PutBodyCareer implements GenericPutBody<PutBodyCareer> {
 
     public void setToDos(List<String> toDos) {
         this.toDos = toDos;
-    }
-
-    public String getToDo() {
-        return toDo;
-    }
-
-    public void setToDo(String toDo) {
-        this.toDo = toDo;
     }
 }

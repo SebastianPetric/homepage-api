@@ -55,11 +55,6 @@ public class Academic implements Serializable, GenericEntity<Academic, PutBodyAc
             setTo_date(source.getTo_date());
         if (source.getFocusList() != null)
             setFocusList(source.getFocusList());
-        if (source.getFocusPoint() != null) {
-            List<String> tmp = getFocusList();
-            tmp.add(source.getFocusPoint());
-            setFocusList(tmp);
-        }
         return this;
     }
 
