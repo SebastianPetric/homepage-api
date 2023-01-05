@@ -1,11 +1,12 @@
 package com.sebastian.homepage.api.domain.core.email;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 public class EmailContent {
 
     @NotEmpty
-    @jakarta.validation.constraints.Email
+    @Email(message = "Email must be valid")
     private String email;
 
     private String optionalText;
