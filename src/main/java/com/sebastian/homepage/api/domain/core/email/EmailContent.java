@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 public class EmailContent {
 
     @NotEmpty
-    @Email(message = "Email must be valid")
+    @Email(message = "Bitte geben Sie eine valide Email Adresse an.")
     private String email;
 
     private String optionalText;
