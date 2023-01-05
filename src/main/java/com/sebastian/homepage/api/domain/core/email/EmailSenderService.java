@@ -17,11 +17,11 @@ public class EmailSenderService {
     @Value("${email.to}")
     private String to;
 
-    public void sendEmail(String RequesterEmail) {
+    public void sendEmail(String RequesterEmail, String optionalText) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(from);
         simpleMailMessage.setTo(to);
-        simpleMailMessage.setText("Bitte Lebenslauf an: ".concat(RequesterEmail).concat(" verschicken."));
+        simpleMailMessage.setText("Bitte Lebenslauf an: ".concat(RequesterEmail).concat(" verschicken. \n\n").concat("Optionale Nachricht: \n\n").concat(optionalText));
         simpleMailMessage.setSubject("Lebenslauf Anfrage");
 
         mailSender.send(simpleMailMessage);
