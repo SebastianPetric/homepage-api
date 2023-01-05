@@ -33,7 +33,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/users").permitAll()// GET requests don't need auth
+        http.csrf().disable().authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/users").permitAll()// GET requests don't need auth
                 .requestMatchers(HttpMethod.GET, "/academic").permitAll()
                 .requestMatchers(HttpMethod.GET, "/career").permitAll()
                 .requestMatchers(HttpMethod.GET, "/experiences").permitAll()
@@ -90,5 +90,4 @@ public class SecurityConfig {
 
         return jwtAuthenticationConverter;
     }
-
 }

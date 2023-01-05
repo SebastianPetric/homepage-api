@@ -5,12 +5,15 @@ import java.util.Date;
 public class ErrorMessage {
     private final Date timestamp;
     private final String message;
-    private final String description;
+    private final String rejectedValue;
 
-    public ErrorMessage(Date timestamp, String message, String description) {
+    private final String rejectedField;
+
+    public ErrorMessage(Date timestamp, String message, String rejectedField, String rejectedValue) {
         this.timestamp = timestamp;
         this.message = message;
-        this.description = description;
+        this.rejectedValue = rejectedValue;
+        this.rejectedField = rejectedField;
     }
 
 
@@ -22,7 +25,11 @@ public class ErrorMessage {
         return message;
     }
 
-    public String getDescription() {
-        return description;
+    public String getRejectedValue() {
+        return rejectedValue;
+    }
+
+    public String getRejectedField() {
+        return rejectedField;
     }
 }
