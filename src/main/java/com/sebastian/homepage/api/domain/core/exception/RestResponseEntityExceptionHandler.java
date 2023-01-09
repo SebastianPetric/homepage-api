@@ -35,6 +35,16 @@ public class RestResponseEntityExceptionHandler {
         return message;
     }
 
+    @ExceptionHandler(value = {MailSendException.class})
+    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
+    protected ErrorMessage handleThis(MailSendException exception, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                new Date(),
+                exception.getMessage(),
+                request.getDescription(false), null);
+        return message;
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     protected ErrorMessage handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
