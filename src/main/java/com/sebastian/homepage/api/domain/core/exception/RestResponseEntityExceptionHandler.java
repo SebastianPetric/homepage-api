@@ -25,6 +25,16 @@ public class RestResponseEntityExceptionHandler {
         return message;
     }
 
+    @ExceptionHandler(value = {FriendlyCaptchaUnavailableException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    protected ErrorMessage handleThis(FriendlyCaptchaUnavailableException exception, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                new Date(),
+                exception.getMessage(),
+                request.getDescription(false), null);
+        return message;
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     protected ErrorMessage handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {

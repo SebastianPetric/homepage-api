@@ -11,6 +11,10 @@ public class EmailContent {
 
     private String optionalText;
 
+    private String solution;
+
+    private String siteKey;
+
     public String getEmail() {
         return email;
     }
@@ -25,5 +29,21 @@ public class EmailContent {
 
     public void setOptionalText(String optionalText) {
         this.optionalText = optionalText;
+    }
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
+    }
+
+    public String getSiteKey() {
+        return siteKey;
+    }
+
+    public void setSiteKey(String siteKey) {
+        this.siteKey = siteKey;
     }
 }
