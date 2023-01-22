@@ -19,12 +19,12 @@ public class Experience implements Serializable, GenericEntity<Experience, PutBo
     private String title;
 
     @NotEmpty
-    private List<String> experiencePoints;
+    private List<ExperiencePoint> experiencePoints;
 
     public Experience() {
     }
 
-    public Experience(String id, String title, List<String> experiencePoints) {
+    public Experience(String id, String title, List<ExperiencePoint> experiencePoints) {
         this.id = id;
         this.title = title;
         this.experiencePoints = experiencePoints;
@@ -45,7 +45,7 @@ public class Experience implements Serializable, GenericEntity<Experience, PutBo
         if (source.getExperiencePoints() != null)
             setExperiencePoints(source.getExperiencePoints());
         if (source.getExperience() != null) {
-            List<String> tmp = getExperiencePoints();
+            List<ExperiencePoint> tmp = getExperiencePoints();
             tmp.add(source.getExperience());
             setExperiencePoints(tmp);
         }
@@ -75,11 +75,11 @@ public class Experience implements Serializable, GenericEntity<Experience, PutBo
         this.title = title;
     }
 
-    public List<String> getExperiencePoints() {
+    public List<ExperiencePoint> getExperiencePoints() {
         return experiencePoints;
     }
 
-    public void setExperiencePoints(List<String> experiencePoints) {
+    public void setExperiencePoints(List<ExperiencePoint> experiencePoints) {
         this.experiencePoints = experiencePoints;
     }
 

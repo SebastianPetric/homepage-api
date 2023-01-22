@@ -8,10 +8,9 @@ public class PutBodyExperience implements GenericPutBody<PutBodyExperience> {
 
     private String title;
 
+    private List<ExperiencePoint> experiencePoints;
 
-    private List<String> experiencePoints;
-
-    private String experience;
+    private ExperiencePoint experience;
 
     public String getTitle() {
         return title;
@@ -21,19 +20,19 @@ public class PutBodyExperience implements GenericPutBody<PutBodyExperience> {
         this.title = title;
     }
 
-    public List<String> getExperiencePoints() {
+    public List<ExperiencePoint> getExperiencePoints() {
         return experiencePoints;
     }
 
-    public void setExperiencePoints(List<String> experiencePoints) {
+    public void setExperiencePoints(List<ExperiencePoint> experiencePoints) {
         this.experiencePoints = experiencePoints;
     }
 
-    public String getExperience() {
+    public ExperiencePoint getExperience() {
         return experience;
     }
 
-    public void setExperience(String experience) {
+    public void setExperience(ExperiencePoint experience) {
         this.experience = experience;
     }
 }
