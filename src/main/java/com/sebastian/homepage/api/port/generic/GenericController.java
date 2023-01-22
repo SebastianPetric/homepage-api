@@ -42,9 +42,9 @@ public abstract class GenericController<T extends GenericEntity<T, B>, B extends
     }
 
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @PreAuthorize("hasAuthority('admin:admin')")
-    public ResponseEntity<T> editById(@PathVariable ObjectId id, @RequestBody @Valid B toModify) {
+    public ResponseEntity<T> editById(@PathVariable ObjectId id, @RequestBody B toModify) {
 
         Optional<T> entity = service.findById(id);
 
